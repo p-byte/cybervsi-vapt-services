@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CyberVSI VAPT Services
 
-## Getting Started
+Standalone CyberVSI services website for VAPT, SOC, vulnerability management, assessment inquiries, and sample security reports.
 
-First, run the development server:
+Target production domain: `https://service.cybervsi.com`
+
+## Local development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Lead form integration
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Copy `.env.example` to `.env.local` and set the deployed Google Apps Script web-app URL:
 
-## Learn More
+```env
+GOOGLE_SHEETS_WEB_APP_URL=https://script.google.com/macros/s/DEPLOYMENT_ID/exec
+```
 
-To learn more about Next.js, take a look at the following resources:
+The Apps Script receiver and deployment steps are in `google-apps-script/`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Quality checks
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm run lint
+npm run build
+```
 
-## Deploy on Vercel
+## Reports
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The PDFs in `public/reports/` are fictional CyberVSI examples. They contain no client data and are informed by OWASP WSTG, NIST SP 800-115, FIRST CVSS, and PCI SSC penetration-testing guidance. When externally hosted report links are supplied, update the report entries in `src/app/reports/page.tsx`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Deployment
+
+The intended deployment platform is Vercel. Configure the Google Apps Script URL as a server-side environment variable and attach `service.cybervsi.com` only after DNS ownership and production deployment are ready.

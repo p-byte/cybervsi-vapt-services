@@ -1,69 +1,161 @@
-import Image from "next/image";
+import { ButtonLink } from "@/components/ButtonLink";
+import { CtaBand } from "@/components/CtaBand";
+import { SectionHeading } from "@/components/SectionHeading";
+import { SecurityVisual } from "@/components/SecurityVisual";
+import { ServiceCard } from "@/components/ServiceCard";
+import { siteConfig } from "@/lib/config";
+import { coreServices } from "@/lib/services";
+import { pageMetadata } from "@/lib/seo";
+
+export const metadata = pageMetadata({
+  title: "Cybersecurity Services",
+  description:
+    "VAPT, SOC monitoring, and vulnerability management services for organizations that need practical security assurance.",
+});
+
+const trustCapabilities = [
+  "Web Application Security",
+  "API Security",
+  "Network Security",
+  "Cloud Security",
+  "Endpoint Monitoring",
+  "SIEM Monitoring",
+  "Threat Detection",
+  "Vulnerability Management",
+];
+
+const process = [
+  ["Discovery", "Understand your environment, objectives, security concerns, and scope."],
+  ["Scope", "Define assets, applications, infrastructure, timelines, and boundaries."],
+  ["Assessment / Monitoring", "Perform the agreed security activity with the right controls."],
+  ["Analysis", "Validate findings and determine actual security risk."],
+  ["Reporting", "Provide actionable technical and executive reporting."],
+  ["Remediation", "Work with your technical teams to understand and address issues."],
+  ["Validation", "Retest or validate remediation where included in the engagement."],
+];
+
+const industries = [
+  "SaaS",
+  "FinTech",
+  "Healthcare",
+  "E-Commerce",
+  "Technology",
+  "Professional Services",
+  "Startups",
+  "SMEs",
+  "Enterprises",
+];
+
+const differentiators = [
+  "Manual security validation",
+  "Actionable findings",
+  "Clear remediation guidance",
+  "Risk-focused prioritization",
+  "Security analyst expertise",
+  "Flexible engagements",
+  "Technical and executive reporting",
+  "Transparent communication",
+];
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <main className="page-main">
+      <section className="hero">
+        <div>
+          <p className="eyebrow">VAPT · SOC · Vulnerability Management</p>
+          <h1>Find Security Gaps Before Attackers Do.</h1>
+          <p className="hero-copy">
+            {siteConfig.name} helps organizations identify vulnerabilities, monitor threats, and
+            manage security exposure through practical testing, security operations support, and
+            continuous vulnerability management.
           </p>
+          <div className="hero-actions">
+            <ButtonLink href="/request-assessment">Request a Security Assessment</ButtonLink>
+            <ButtonLink href="/services" variant="secondary">
+              Explore Our Services
+            </ButtonLink>
+            <ButtonLink href="/contact" variant="ghost">
+              Talk to a Security Expert
+            </ButtonLink>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <SecurityVisual />
+      </section>
+
+      <section className="section section-alt">
+        <SectionHeading
+          eyebrow="Trust"
+          title="Security Built Around Real-World Threats"
+          body="The work is grounded in evidence, analyst review, and communication your technical and leadership teams can act on."
+        />
+        <div className="grid grid-4">
+          {trustCapabilities.map((item) => (
+            <div className="capability-card" key={item}>
+              {item}
+            </div>
+          ))}
         </div>
-      </main>
-    </div>
+      </section>
+
+      <section className="section">
+        <SectionHeading
+          eyebrow="Core services"
+          title="Focused security services for modern organizations"
+          body="Dedicated service tracks make it clear what will be tested, monitored, prioritized, and reported."
+        />
+        <div className="grid grid-3">
+          {coreServices.map((service) => (
+            <ServiceCard key={service.slug} {...service} />
+          ))}
+        </div>
+      </section>
+
+      <section className="split-section section-alt" id="how-we-work">
+        <SectionHeading
+          eyebrow="How we work"
+          title="A clear engagement process from scope to validation"
+          body="Each engagement is scoped around business objectives, technical reality, and a usable report."
+        />
+        <div className="timeline">
+          {process.map(([title, body], index) => (
+            <div className="timeline-item" key={title}>
+              <span className="step-number">{index + 1}</span>
+              <div>
+                <h3>{title}</h3>
+                <p>{body}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="section" id="industries">
+        <SectionHeading
+          eyebrow="Industries"
+          title="Security support for teams with different operating realities"
+          body="Engagements can be adapted to product teams, regulated environments, growing companies, and enterprise technology estates."
+        />
+        <div className="grid grid-3">
+          {industries.map((industry) => (
+            <div className="capability-card" key={industry}>
+              {industry}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="section section-alt">
+        <SectionHeading eyebrow="Why choose us" title="Credibility without inflated claims" />
+        <div className="grid grid-4">
+          {differentiators.map((item) => (
+            <div className="principle-card" key={item}>
+              {item}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <CtaBand />
+    </main>
   );
 }
