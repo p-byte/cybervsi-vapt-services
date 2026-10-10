@@ -6,11 +6,13 @@ const outputDir = fileURLToPath(new URL("../sales/", import.meta.url));
 const outputPath = fileURLToPath(new URL("../sales/CyberVSI_90_Day_Client_Pipeline.xlsx", import.meta.url));
 const previewPath = fileURLToPath(new URL("../sales/pipeline-preview.png", import.meta.url));
 const budgetPreviewPath = fileURLToPath(new URL("../sales/budget-preview.png", import.meta.url));
+const outreachPreviewPath = fileURLToPath(new URL("../sales/outreach-preview.png", import.meta.url));
 const wb = Workbook.create();
 const summary = wb.worksheets.add("Dashboard");
 const pipeline = wb.worksheets.add("Prospect Pipeline");
 const weekly = wb.worksheets.add("13-Week Plan");
 const budget = wb.worksheets.add("Lean Budget");
+const outreach = wb.worksheets.add("Outreach Drafts");
 const font = "Arial";
 const navy = "#0B1628";
 const teal = "#24B8A6";
@@ -19,7 +21,7 @@ const light = "#EAF1F8";
 const amber = "#FFF2CC";
 const border = "#C9D5E3";
 
-for (const sheet of [summary, pipeline, weekly, budget]) {
+for (const sheet of [summary, pipeline, weekly, budget, outreach]) {
   sheet.showGridLines = false;
   sheet.getRange("A1:Z200").format.font = { name: font, size: 10, color: "#172033" };
 }
@@ -27,6 +29,7 @@ summary.tabColor = navy;
 pipeline.tabColor = teal;
 weekly.tabColor = blue;
 budget.tabColor = "#6B7280";
+outreach.tabColor = "#8B5CF6";
 
 summary.getRange("A2:H2").merge();
 summary.getRange("A2").values = [["CyberVSI 90-Day Client Acquisition Dashboard"]];
@@ -88,7 +91,19 @@ pipeline.getRange("A3").format.font = { name: font, italic: true, color: "#52647
 const headers = ["ID", "Company", "Website", "City", "Industry", "Contact", "Role", "Email / LinkedIn", "Source", "Service Need", "Buying Signal", "Week", "Stage", "Est. Deal Value", "Last Interaction", "Next Follow-up", "Outcome / Loss Reason", "Notes"];
 pipeline.getRange("A4:R4").values = [headers];
 pipeline.getRange("A4:R4").format = { fill: navy, font: { name: font, bold: true, color: "#FFFFFF" }, horizontalAlignment: "center", verticalAlignment: "center", wrapText: true };
-const rows = Array.from({ length: 600 }, (_, index) => [index + 1, ...Array(17).fill(null)]);
+const seedProspects = [
+  [1, "DewWeb Solution", "https://dewweb.in/", "Hyderabad", "SaaS development agency", null, "Founder / Partnerships Head", "support@dewweb.in", "Public company website", "Agency Partnership", "Builds production SaaS platforms, MVPs, web applications, and AI products for startup clients", 2, "Identified", 25000, null, null, null, "Outreach angle: offer independent Web/API VAPT before DewWeb client launches and enterprise security reviews."],
+  [2, "Agzenix", "https://agzenix.com/", "Hyderabad", "Software product engineering", null, "Founder / Delivery Head", null, "Public company website", "Agency Partnership", "Builds and evolves software products and technology platforms with long-term delivery involvement", 2, "Identified", 25000, null, null, null, "Outreach angle: complement product engineering engagements with independent application-security validation."],
+  [3, "TantraDev Information Technologies", "https://www.tantradev.com/", "Pune", "Software development agency", null, "Founder / Delivery Head", null, "Public company website", "Agency Partnership", "Builds and operates web, mobile, SaaS, and enterprise platforms", 2, "Identified", 25000, null, null, null, "Outreach angle: add scoped Web/API VAPT before production launches and for recurring assurance."],
+  [4, "Dharmsy Innovations", "https://www.dharmsy.com/pune", "Pune", "Custom software development", null, "Founder / Partnerships Head", null, "Public company website", "Agency Partnership", "Develops SaaS platforms, dashboards, APIs, integrations, and custom web applications", 2, "Identified", 25000, null, null, null, "Outreach angle: independent security testing for SaaS and API projects delivered to business clients."],
+  [5, "Leacotta", "https://leacotta.com/", "Bengaluru", "AI and SaaS engineering", null, "Founder / Engineering Head", null, "Public company website", "Agency Partnership", "Ships production SaaS products with authentication, billing, admin dashboards, and integrations", 2, "Identified", 30000, null, null, null, "Outreach angle: manual business-logic and access-control testing for multi-tenant SaaS launches."],
+  [6, "Vedrisha", "https://www.vedrisha.com/", "Pune", "Software and cloud engineering", null, "Founder / Partnerships Head", null, "Public company website", "Agency Partnership", "Builds custom software, websites, cloud architectures, and AI systems for startups and enterprises", 2, "Identified", 25000, null, null, null, "Outreach angle: partner for third-party VAPT evidence on client web and cloud projects."],
+  [7, "Trimsel", "https://www.trimsel.com/", "Chennai", "Custom software development", null, "Founder / Delivery Head", null, "Public company website", "Agency Partnership", "Delivers web platforms and software across fintech, healthtech, logistics, and SaaS", 2, "Identified", 30000, null, null, null, "Outreach angle: independent testing for security-sensitive fintech, healthtech, and SaaS client applications."],
+  [8, "Hexolve", "https://www.hexolve.in/", "Chennai", "AI and software development", null, "Founder / Engineering Head", null, "Public company website", "Agency Partnership", "Builds cloud-scale custom software, SaaS products, APIs, and production AI systems", 2, "Identified", 25000, null, null, null, "Outreach angle: offer pre-launch Web/API VAPT as an independent quality gate for client products."],
+  [9, "Bytes Brothers", "https://www.bytesbrothers.com/services/saas-development-company-in-chennai/", "Chennai", "SaaS development agency", null, "Founder / Delivery Head", null, "Public company website", "Agency Partnership", "Builds multi-tenant SaaS products with authentication, billing, integrations, and weekly staging releases", 2, "Identified", 30000, null, null, null, "Outreach angle: test tenant isolation, authentication, authorization, billing, and API integrations before handover."],
+  [10, "ThreeAtoms", "https://www.threeatoms.com/", "Hyderabad", "Web and AI engineering", null, "Founder / Partnerships Head", null, "Public company website", "Agency Partnership", "Builds modern web software, startup systems, automation products, and production digital platforms", 2, "Identified", 25000, null, null, null, "Outreach angle: scoped application testing for startup and enterprise web projects before release."],
+];
+const rows = Array.from({ length: 600 }, (_, index) => seedProspects[index] ?? [index + 1, ...Array(17).fill(null)]);
 pipeline.getRange("A5:R604").values = rows;
 pipeline.getRange("A5:A604").format.numberFormat = "0";
 pipeline.getRange("L5:L604").dataValidation = { rule: { type: "whole", operator: "between", formula1: 1, formula2: 13 } };
@@ -183,12 +198,44 @@ budget.getRange("B:E").format.columnWidth = 18;
 budget.getRange("F:F").format.columnWidth = 24;
 budget.freezePanes.freezeRows(5);
 
+outreach.getRange("A2:F2").merge();
+outreach.getRange("A2").values = [["Personalized Agency Partnership Outreach — Review Before Sending"]];
+outreach.getRange("A2").format.font = { name: font, size: 16, bold: true, color: navy };
+outreach.getRange("A3:F3").merge();
+outreach.getRange("A3").values = [["No messages have been sent. Confirm the decision-maker and public business contact before outreach."]];
+outreach.getRange("A3").format.font = { name: font, italic: true, color: "#52647A" };
+outreach.getRange("A5:F5").values = [["Company", "Suggested Recipient", "Channel", "Initial Message", "Follow-up", "Approval Status"]];
+outreach.getRange("A5:F5").format = { fill: navy, font: { name: font, bold: true, color: "#FFFFFF" }, horizontalAlignment: "center", verticalAlignment: "center", wrapText: true };
+const outreachRows = seedProspects.map((prospect) => {
+  const company = prospect[1];
+  const recipient = prospect[6];
+  const angle = String(prospect[17]).replace("Outreach angle: ", "");
+  const initial = `Hi [Name], I noticed ${company} works on SaaS and web-software projects. I run CyberVSI, providing independent web application and API penetration testing. We are exploring partnerships with development teams that need a security-testing partner before client launches or security reviews. A relevant fit may be to ${angle.charAt(0).toLowerCase()}${angle.slice(1)} Would you be open to a short discussion? I can share our testing process and sanitized sample report.`;
+  const followUp = `Hi [Name], following up on my note about independent Web/API VAPT support for ${company}'s client projects. If an upcoming release or customer review needs third-party testing, I can share a sample deliverable and propose a clearly bounded scope. Would that be useful?`;
+  return [company, recipient, "LinkedIn or public business email", initial, followUp, "Needs approval"];
+});
+outreach.getRange("A6:F15").values = outreachRows;
+outreach.getRange("F6:F15").dataValidation = { rule: { type: "list", values: ["Needs approval", "Approved", "Do not contact", "Sent", "Replied"] } };
+outreach.getRange("F6:F15").format.fill = amber;
+outreach.getRange("A5:F15").format.borders = { insideHorizontal: { style: "thin", color: border } };
+outreach.getRange("A6:F15").format.verticalAlignment = "top";
+outreach.getRange("A6:F15").format.wrapText = true;
+outreach.getRange("A:A").format.columnWidth = 24;
+outreach.getRange("B:B").format.columnWidth = 24;
+outreach.getRange("C:C").format.columnWidth = 24;
+outreach.getRange("D:D").format.columnWidth = 68;
+outreach.getRange("E:E").format.columnWidth = 58;
+outreach.getRange("F:F").format.columnWidth = 18;
+outreach.freezePanes.freezeRows(5);
+
 wb.recalculate();
 await fs.mkdir(outputDir, { recursive: true });
 const preview = await wb.render({ sheetName: "Dashboard", range: "A1:H17", scale: 1.5, format: "png" });
 await fs.writeFile(previewPath, new Uint8Array(await preview.arrayBuffer()));
 const budgetPreview = await wb.render({ sheetName: "Lean Budget", range: "A1:F19", scale: 1.5, format: "png" });
 await fs.writeFile(budgetPreviewPath, new Uint8Array(await budgetPreview.arrayBuffer()));
+const outreachPreview = await wb.render({ sheetName: "Outreach Drafts", range: "A1:F15", scale: 1, format: "png" });
+await fs.writeFile(outreachPreviewPath, new Uint8Array(await outreachPreview.arrayBuffer()));
 const xlsx = await SpreadsheetFile.exportXlsx(wb);
 await xlsx.save(outputPath);
 
@@ -196,6 +243,8 @@ const inspection = await wb.inspect({ kind: "table", range: "Dashboard!A1:H17", 
 console.log(inspection.ndjson);
 const budgetInspection = await wb.inspect({ kind: "table", range: "Lean Budget!A1:F19", include: "values,formulas", tableMaxRows: 25, tableMaxCols: 8 });
 console.log(budgetInspection.ndjson);
+const outreachInspection = await wb.inspect({ kind: "table", range: "Outreach Drafts!A1:F8", include: "values", tableMaxRows: 10, tableMaxCols: 8, tableMaxCellChars: 300 });
+console.log(outreachInspection.ndjson);
 const errors = await wb.inspect({ kind: "match", searchTerm: "#REF!|#DIV/0!|#VALUE!|#NAME\\?|#N/A|#NUM!|#NULL!|#SPILL!|#CALC!", options: { useRegex: true, maxResults: 100 }, summary: "final formula error scan" });
 console.log(errors.ndjson);
 console.log(outputPath);

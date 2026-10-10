@@ -39,6 +39,7 @@ yarn-error.log*
 /tmp/
 /sales/pipeline-preview.png
 /sales/budget-preview.png
+/sales/outreach-preview.png
 /sales/*.inspect.ndjson
 
 # vercel
