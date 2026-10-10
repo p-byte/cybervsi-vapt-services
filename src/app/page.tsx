@@ -8,9 +8,9 @@ import { coreServices } from "@/lib/services";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Cybersecurity Services",
+  title: "Web Application & API VAPT Services",
   description:
-    "VAPT, SOC monitoring, and vulnerability management services for organizations that need practical security assurance.",
+    "Web application and API VAPT services for Indian startups and software companies, with manual validation, actionable reports, and remediation retesting.",
 });
 
 const trustCapabilities = [
@@ -62,17 +62,17 @@ export default function Home() {
     <main className="page-main">
       <section className="hero">
         <div>
-          <p className="eyebrow">VAPT · SOC · Vulnerability Management</p>
-          <h1>Find Security Gaps Before Attackers Do.</h1>
+          <p className="eyebrow">Web Application VAPT · API Security Testing</p>
+          <h1>Application Security Testing for Software Teams That Need Clear Answers.</h1>
           <p className="hero-copy">
-            {siteConfig.name} helps organizations identify vulnerabilities, monitor threats, and
-            manage security exposure through practical testing, security operations support, and
-            continuous vulnerability management.
+            {siteConfig.name} helps Indian startups and growing software companies identify
+            exploitable weaknesses in web applications and APIs, with practical remediation
+            guidance and verification testing.
           </p>
           <div className="hero-actions">
             <ButtonLink href="/request-assessment">Request a Security Assessment</ButtonLink>
-            <ButtonLink href="/services" variant="secondary">
-              Explore Our Services
+            <ButtonLink href="/pricing" variant="secondary">
+              View VAPT Packages
             </ButtonLink>
             <ButtonLink href="/contact" variant="ghost">
               Talk to a Security Expert
@@ -94,6 +94,26 @@ export default function Home() {
               {item}
             </div>
           ))}
+        </div>
+      </section>
+
+      <section className="section">
+        <SectionHeading
+          eyebrow="Flagship services"
+          title="Focused testing for the systems your customers depend on"
+          body="Start with a clearly bounded web application or API assessment. Network testing and recurring vulnerability reviews remain available when the scope requires them."
+        />
+        <div className="grid grid-2">
+          <article className="capability-card">
+            <h3>Web Application VAPT</h3>
+            <p>Manual testing of authentication, authorization, session handling, business logic, input processing, and security configuration.</p>
+            <ButtonLink href="/services/web-application-penetration-testing" variant="ghost">Explore Web Application VAPT</ButtonLink>
+          </article>
+          <article className="capability-card">
+            <h3>API Security Testing</h3>
+            <p>Authorization, authentication, data exposure, resource abuse, injection, and business workflow testing for REST and GraphQL APIs.</p>
+            <ButtonLink href="/services/api-penetration-testing" variant="ghost">Explore API Security Testing</ButtonLink>
+          </article>
         </div>
       </section>
 

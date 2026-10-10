@@ -18,9 +18,9 @@ export const siteConfig = {
 
 export const navItems = [
   { label: "Services", href: "/services" },
+  { label: "Pricing", href: "/pricing" },
   { label: "Sample Reports", href: "/reports" },
-  { label: "Industries", href: "/#industries" },
-  { label: "How We Work", href: "/#how-we-work" },
+  { label: "Agency Partners", href: "/partners" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
