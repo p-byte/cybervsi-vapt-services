@@ -5,10 +5,12 @@ import { SpreadsheetFile, Workbook } from "@oai/artifact-tool";
 const outputDir = fileURLToPath(new URL("../sales/", import.meta.url));
 const outputPath = fileURLToPath(new URL("../sales/CyberVSI_90_Day_Client_Pipeline.xlsx", import.meta.url));
 const previewPath = fileURLToPath(new URL("../sales/pipeline-preview.png", import.meta.url));
+const budgetPreviewPath = fileURLToPath(new URL("../sales/budget-preview.png", import.meta.url));
 const wb = Workbook.create();
 const summary = wb.worksheets.add("Dashboard");
 const pipeline = wb.worksheets.add("Prospect Pipeline");
 const weekly = wb.worksheets.add("13-Week Plan");
+const budget = wb.worksheets.add("Lean Budget");
 const font = "Arial";
 const navy = "#0B1628";
 const teal = "#24B8A6";
@@ -17,13 +19,14 @@ const light = "#EAF1F8";
 const amber = "#FFF2CC";
 const border = "#C9D5E3";
 
-for (const sheet of [summary, pipeline, weekly]) {
+for (const sheet of [summary, pipeline, weekly, budget]) {
   sheet.showGridLines = false;
   sheet.getRange("A1:Z200").format.font = { name: font, size: 10, color: "#172033" };
 }
 summary.tabColor = navy;
 pipeline.tabColor = teal;
 weekly.tabColor = blue;
+budget.tabColor = "#6B7280";
 
 summary.getRange("A2:H2").merge();
 summary.getRange("A2").values = [["CyberVSI 90-Day Client Acquisition Dashboard"]];
@@ -57,7 +60,7 @@ summary.getRange("A12:H12").merge();
 summary.getRange("A12").values = [["Operating focus"]];
 summary.getRange("A12").format = { fill: light, font: { name: font, bold: true, color: navy } };
 summary.getRange("A13:H16").values = [
-  ["Primary offer", "Web Application VAPT", "Primary offer", "API Security Testing", "Target cities", "Bengaluru, Hyderabad, Pune, Chennai", "Budget", "₹5,000–₹15,000/month"],
+  ["Primary offer", "Web Application VAPT", "Primary offer", "API Security Testing", "Target cities", "Bengaluru, Hyderabad, Pune, Chennai", "Budget cap", "₹3,000/month"],
   ["Priority partners", "Software development agencies", "Decision makers", "CTO, founder, engineering head", "Follow-ups", "One or two, then stop", "Review cadence", "Every Friday"],
   ["Day 30", "250 prospects and one serious proposal", "Day 60", "1–2 paying clients", "Day 90", "5 paying clients targeted", "Payment example", "50% upfront / 50% delivery"],
   ["Safeguards", "Authorization, NDA, SOW", "Testing", "Defined scope and windows", "Data", "Secure handling and deletion", "Claims", "No unverified empanelment"],
@@ -140,15 +143,59 @@ weekly.getRange("F:F").format.columnWidth = 36;
 const weeklyTable = weekly.tables.add("A4:F17", true, "WeeklyExecutionPlan");
 weeklyTable.style = "TableStyleMedium2";
 
+budget.getRange("A2:F2").merge();
+budget.getRange("A2").values = [["Lean Marketing Budget — Maximum ₹3,000 per Month"]];
+budget.getRange("A2").format.font = { name: font, size: 16, bold: true, color: navy };
+budget.getRange("A3:F3").merge();
+budget.getRange("A3").values = [["Prioritize direct prospecting and agency referrals. Use paid search only after conversion tracking is working and the landing page converts."]];
+budget.getRange("A3").format.font = { name: font, italic: true, color: "#52647A" };
+budget.getRange("A5:E5").values = [["Activity", "Month 1", "Month 2", "Month 3", "90-Day Total"]];
+budget.getRange("A5:E5").format = { fill: navy, font: { name: font, bold: true, color: "#FFFFFF" }, horizontalAlignment: "center" };
+budget.getRange("A6:D10").values = [
+  ["Prospect research and outreach", 1000, 750, 750],
+  ["Website and sales collateral", 500, 250, 250],
+  ["Agency partnerships and networking", 1000, 1000, 1000],
+  ["Google Search Ads test", 0, 500, 500],
+  ["Reserve", 500, 500, 500],
+];
+budget.getRange("E6:E10").formulas = [["=SUM(B6:D6)"], ["=SUM(B7:D7)"], ["=SUM(B8:D8)"], ["=SUM(B9:D9)"], ["=SUM(B10:D10)"]];
+budget.getRange("A11:E11").values = [["Monthly / 90-day total", null, null, null, null]];
+budget.getRange("B11:D11").formulas = [["=SUM(B6:B10)", "=SUM(C6:C10)", "=SUM(D6:D10)"]];
+budget.getRange("E11").formulas = [["=SUM(E6:E10)"]];
+budget.getRange("A11:E11").format = { fill: light, font: { name: font, bold: true, color: navy } };
+budget.getRange("B6:E11").format.numberFormat = "₹#,##0";
+budget.getRange("A5:E11").format.borders = { insideHorizontal: { style: "thin", color: border } };
+budget.getRange("A14:F14").merge();
+budget.getRange("A14").values = [["Spending rules"]];
+budget.getRange("A14").format = { fill: light, font: { name: font, bold: true, color: navy } };
+budget.getRange("A15:F19").values = [
+  ["1", "Do not run LinkedIn, Instagram, or Facebook ads during this 90-day plan.", null, null, null, null],
+  ["2", "Use LinkedIn organically for targeted founder, CTO, and agency outreach.", null, null, null, null],
+  ["3", "Do not activate the ₹500 Google Ads test until analytics and form-conversion tracking work.", null, null, null, null],
+  ["4", "If paid search produces no qualified enquiries, move the remaining ad allocation to research or networking.", null, null, null, null],
+  ["5", "Never buy bulk email lists or perform unsolicited vulnerability scans.", null, null, null, null],
+];
+budget.getRange("B15:F19").merge(true);
+budget.getRange("A15:F19").format.wrapText = true;
+budget.getRange("A15:F19").format.verticalAlignment = "top";
+budget.getRange("A:A").format.columnWidth = 34;
+budget.getRange("B:E").format.columnWidth = 18;
+budget.getRange("F:F").format.columnWidth = 24;
+budget.freezePanes.freezeRows(5);
+
 wb.recalculate();
 await fs.mkdir(outputDir, { recursive: true });
 const preview = await wb.render({ sheetName: "Dashboard", range: "A1:H17", scale: 1.5, format: "png" });
 await fs.writeFile(previewPath, new Uint8Array(await preview.arrayBuffer()));
+const budgetPreview = await wb.render({ sheetName: "Lean Budget", range: "A1:F19", scale: 1.5, format: "png" });
+await fs.writeFile(budgetPreviewPath, new Uint8Array(await budgetPreview.arrayBuffer()));
 const xlsx = await SpreadsheetFile.exportXlsx(wb);
 await xlsx.save(outputPath);
 
 const inspection = await wb.inspect({ kind: "table", range: "Dashboard!A1:H17", include: "values,formulas", tableMaxRows: 20, tableMaxCols: 10 });
 console.log(inspection.ndjson);
+const budgetInspection = await wb.inspect({ kind: "table", range: "Lean Budget!A1:F19", include: "values,formulas", tableMaxRows: 25, tableMaxCols: 8 });
+console.log(budgetInspection.ndjson);
 const errors = await wb.inspect({ kind: "match", searchTerm: "#REF!|#DIV/0!|#VALUE!|#NAME\\?|#N/A|#NUM!|#NULL!|#SPILL!|#CALC!", options: { useRegex: true, maxResults: 100 }, summary: "final formula error scan" });
 console.log(errors.ndjson);
 console.log(outputPath);
