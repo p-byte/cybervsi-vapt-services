@@ -10,11 +10,11 @@ export const metadata = pageMetadata({
 
 const reports = [
   {
-    title: "Comprehensive Web Application VAPT Report",
+    title: "Full Web Application Security Assessment",
     description:
-      "An expanded fictional deliverable with document control, scope, methodology, CVSS 3.1 vectors, ten detailed findings, remediation roadmap, retest criteria, and compliance mapping.",
-    detail: "Web application · 10 findings · Comprehensive sample PDF",
-    href: "/reports/cybervsi-comprehensive-web-application-vapt-sample.pdf",
+      "A full-length sanitized sample preserving a professional assessment structure, CVSS details, finding lifecycle, remediation review, and compliance mapping while removing all client data and evidence.",
+    detail: "Web application · 47 pages · Sanitized full report",
+    href: "/reports/cybervsi-sanitized-web-application-assessment-sample.pdf",
   },
   {
     title: "Web Application VAPT Report",
