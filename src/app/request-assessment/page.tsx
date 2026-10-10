@@ -22,9 +22,9 @@ export default function RequestAssessmentPage() {
       </section>
       <section className="split-section">
         <SectionHeading
-          eyebrow="Lead form"
-          title="Share your requirement"
-          body="The form includes client-side validation, server-side validation, honeypot bot protection, safe error handling, and a rate-limiting architecture placeholder."
+          eyebrow="Your requirement"
+          title="Tell us what needs to be tested or monitored"
+          body="Share the type of application, API, infrastructure, or security operation you need help with. We will use the information to understand the scope and respond by email."
         />
         <LeadForm />
       </section>

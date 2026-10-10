@@ -1,7 +1,9 @@
 import { CtaBand } from "@/components/CtaBand";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ServiceCard } from "@/components/ServiceCard";
-import { coreServices, futureServices } from "@/lib/services";
+import Link from "next/link";
+import { coreServices } from "@/lib/services";
+import { penetrationTestingServices } from "@/lib/penetrationTestingServices";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -31,15 +33,17 @@ export default function ServicesPage() {
       </section>
       <section className="section section-alt">
         <SectionHeading
-          eyebrow="Expandable architecture"
-          title="Additional service lines can be added without redesigning the site"
-          body="These are prepared as future categories and should be enabled when the company is ready to represent them accurately."
+          eyebrow="Penetration testing"
+          title="Choose the assessment that matches your attack surface"
+          body="Focused testing pages explain the scope, security coverage, evidence, and reporting available for each environment."
         />
-        <div className="grid grid-4">
-          {futureServices.map((service) => (
-            <div className="capability-card" key={service}>
-              {service}
-            </div>
+        <div className="grid grid-3">
+          {Object.entries(penetrationTestingServices).map(([slug, service]) => (
+            <article className="capability-card" key={slug}>
+              <h2>{service.shortName}</h2>
+              <p>{service.description}</p>
+              <Link href={`/services/${slug}`}>Explore {service.shortName}</Link>
+            </article>
           ))}
         </div>
       </section>

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { navItems, siteConfig } from "@/lib/config";
 import { coreServices } from "@/lib/services";
+import { penetrationTestingServices } from "@/lib/penetrationTestingServices";
 
 export function Footer() {
   return (
@@ -22,6 +23,11 @@ export function Footer() {
         {coreServices.map((service) => (
           <Link key={service.slug} href={service.href}>
             {service.shortTitle}
+          </Link>
+        ))}
+        {Object.entries(penetrationTestingServices).map(([slug, service]) => (
+          <Link key={slug} href={`/services/${slug}`}>
+            {service.shortName}
           </Link>
         ))}
       </div>

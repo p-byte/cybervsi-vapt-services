@@ -21,11 +21,20 @@ export function pageMetadata({ title, description, path = "/" }: SeoInput): Meta
       url,
       siteName: siteConfig.name,
       type: "website",
+      images: [
+        {
+          url: "/opengraph-image",
+          width: 1200,
+          height: 630,
+          alt: "CyberVSI cybersecurity services",
+        },
+      ],
     },
     twitter: {
-      card: "summary",
+      card: "summary_large_image",
       title: fullTitle,
       description,
+      images: ["/opengraph-image"],
     },
   };
 }
@@ -37,12 +46,46 @@ export function organizationSchema() {
     name: siteConfig.name,
     url: siteConfig.domain,
     email: siteConfig.email,
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "sales",
+      email: siteConfig.email,
+      availableLanguage: "English",
+    },
     areaServed: "Global",
     serviceType: [
       "Vulnerability Assessment and Penetration Testing",
       "Security Operations Center Services",
       "Vulnerability Management",
     ],
+  };
+}
+
+export function websiteSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: siteConfig.name,
+    url: siteConfig.domain,
+    description: siteConfig.description,
+    publisher: {
+      "@type": "Organization",
+      name: siteConfig.name,
+      url: siteConfig.domain,
+    },
+  };
+}
+
+export function breadcrumbSchema(items: { name: string; path: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: new URL(item.path, siteConfig.domain).toString(),
+    })),
   };
 }
 

@@ -2,6 +2,8 @@ import { ButtonLink } from "@/components/ButtonLink";
 import { CtaBand } from "@/components/CtaBand";
 import { JsonLd } from "@/components/JsonLd";
 import { SectionHeading } from "@/components/SectionHeading";
+import Link from "next/link";
+import { penetrationTestingServices } from "@/lib/penetrationTestingServices";
 import { faqSchema, pageMetadata, serviceSchema } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -100,6 +102,15 @@ export default function VaptPage() {
             <div className="capability-card" key={area}>
               {area}
             </div>
+          ))}
+        </div>
+        <div className="grid grid-3">
+          {Object.entries(penetrationTestingServices).map(([slug, service]) => (
+            <article className="capability-card" key={slug}>
+              <h2>{service.shortName}</h2>
+              <p>{service.description}</p>
+              <Link href={`/services/${slug}`}>View service details</Link>
+            </article>
           ))}
         </div>
       </section>
