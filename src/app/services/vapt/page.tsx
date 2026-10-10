@@ -148,6 +148,13 @@ export default function VaptPage() {
           ))}
         </div>
       </section>
+      <section className="section section-alt">
+        <SectionHeading eyebrow="Markets" title="VAPT services for India and Singapore" body="Review market-specific service coverage, buyer questions, and security context for each country." />
+        <div className="inline-actions">
+          <Link className="button button-secondary" href="/vapt-services-india">VAPT Services in India</Link>
+          <Link className="button button-secondary" href="/vapt-services-singapore">VAPT Services in Singapore</Link>
+        </div>
+      </section>
       <CtaBand cta="Request a VAPT Assessment" />
     </main>
   );

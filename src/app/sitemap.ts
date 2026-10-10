@@ -11,6 +11,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/contact",
     "/request-assessment",
     "/reports",
+    "/vapt-services-india",
+    "/vapt-services-singapore",
     "/privacy-policy",
     "/terms",
     ...coreServices.map((service) => service.href),

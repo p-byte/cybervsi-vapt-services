@@ -33,6 +33,8 @@ export function Footer() {
       </div>
       <div>
         <h2>Company</h2>
+        <Link href="/vapt-services-india">VAPT Services India</Link>
+        <Link href="/vapt-services-singapore">VAPT Services Singapore</Link>
         {navItems.slice(1).map((item) => (
           <Link key={item.href} href={item.href}>
             {item.label}

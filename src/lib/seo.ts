@@ -89,7 +89,7 @@ export function breadcrumbSchema(items: { name: string; path: string }[]) {
   };
 }
 
-export function serviceSchema(name: string, description: string, path: string) {
+export function serviceSchema(name: string, description: string, path: string, areaServed?: string) {
   return {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -101,6 +101,7 @@ export function serviceSchema(name: string, description: string, path: string) {
       url: siteConfig.domain,
     },
     url: new URL(path, siteConfig.domain).toString(),
+    ...(areaServed ? { areaServed } : {}),
   };
 }
 
