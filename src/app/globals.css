@@ -175,15 +175,15 @@ h3 {
 
 h1 {
   max-width: 12ch;
-  font-size: clamp(3.1rem, 8vw, 6.8rem);
+  font-size: clamp(2.75rem, 5vw, 4.75rem);
 }
 
 h2 {
-  font-size: clamp(2rem, 4vw, 3.8rem);
+  font-size: clamp(1.85rem, 3.4vw, 3.2rem);
 }
 
 h3 {
-  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  font-size: clamp(1.15rem, 1.6vw, 1.5rem);
 }
 
 p {
@@ -400,8 +400,8 @@ p {
 }
 
 .page-hero h1 {
-  max-width: 16ch;
-  font-size: clamp(2.8rem, 7vw, 5.6rem);
+  max-width: 22ch;
+  font-size: clamp(2.6rem, 4.4vw, 4.1rem);
 }
 
 .page-hero p {
@@ -526,6 +526,15 @@ textarea {
   padding-block: 4rem;
 }
 
+.legal-page h1 {
+  max-width: none;
+  font-size: clamp(2.4rem, 4vw, 3.5rem);
+}
+
+.legal-page h2 {
+  font-size: clamp(1.55rem, 2.5vw, 2.1rem);
+}
+
 .report-grid {
   max-width: 72rem;
 }
@@ -539,6 +548,7 @@ textarea {
 
 .report-card h2 {
   font-size: clamp(1.6rem, 3vw, 2.3rem);
+  overflow-wrap: anywhere;
 }
 
 .report-preview {
@@ -644,6 +654,7 @@ textarea {
 
   .grid-3,
   .grid-4,
+  .grid-2,
   .form-grid {
     grid-template-columns: 1fr;
   }
@@ -842,6 +853,24 @@ p { color: var(--muted); }
   box-shadow: 0 10px 28px rgba(16, 40, 36, 0.06);
 }
 
+.capability-card h2,
+.service-card h2,
+.process-step h2,
+.faq-item h2 {
+  font-size: clamp(1.35rem, 2vw, 1.7rem);
+  line-height: 1.18;
+}
+
+.section-heading h2 {
+  max-width: 20ch;
+  font-size: clamp(2rem, 3.5vw, 3.25rem);
+  line-height: 1.08;
+}
+
+.cta-band h2 {
+  font-size: clamp(2rem, 3.5vw, 3.1rem);
+}
+
 .service-card { border-top: 3px solid var(--accent); }
 .tag-list li {
   border-color: #a8d8cf;
@@ -908,6 +937,7 @@ textarea {
   .nav { background: var(--white); }
   .menu-button { border-color: var(--line); color: var(--ink); }
   .hero h1 { font-size: clamp(2.8rem, 13vw, 4.2rem); }
+  .page-hero h1 { font-size: clamp(2.15rem, 8.8vw, 3rem); }
   .hero-form-wrap { padding: 1rem; }
   .signal-strip { grid-template-columns: 1fr; }
   .signal-strip .metric { border-left: 0; border-top: 1px solid rgba(36, 17, 12, 0.22); }
