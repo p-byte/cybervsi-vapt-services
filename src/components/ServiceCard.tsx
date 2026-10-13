@@ -1,4 +1,27 @@
 import { ButtonLink } from "./ButtonLink";
+import {
+  Bot,
+  CloudCog,
+  Crosshair,
+  Eye,
+  Network,
+  ScanSearch,
+  ShieldCheck,
+  Smartphone,
+  Workflow,
+} from "lucide-react";
+
+const icons = {
+  "vulnerability-management": ScanSearch,
+  soc: Eye,
+  "application-security": Workflow,
+  "mobile-security": Smartphone,
+  vapt: ShieldCheck,
+  "network-security": Network,
+  "cloud-security": CloudCog,
+  "red-teaming": Crosshair,
+  "ai-security": Bot,
+} as const;
 
 export function ServiceCard({
   title,
@@ -15,8 +38,11 @@ export function ServiceCard({
   cta: string;
   slug?: string;
 }) {
+  const Icon = icons[slug as keyof typeof icons] ?? ShieldCheck;
+
   return (
     <article className="service-card" id={slug}>
+      <span className="service-icon" aria-hidden="true"><Icon size={24} strokeWidth={1.8} /></span>
       <h3>{title}</h3>
       <p>{description}</p>
       <ul className="tag-list">

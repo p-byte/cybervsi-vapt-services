@@ -7,6 +7,7 @@ import { ServiceCard } from "@/components/ServiceCard";
 import { siteConfig } from "@/lib/config";
 import { coreServices } from "@/lib/services";
 import { pageMetadata } from "@/lib/seo";
+import { ArrowRight, BadgeCheck, FileSearch, Gauge, Radar, RotateCcw, Wrench } from "lucide-react";
 
 export const metadata = pageMetadata({
   title: "Web Application & API VAPT Services",
@@ -104,6 +105,29 @@ const operatingSignals = [
   ["India + Singapore", "Primary service markets"],
 ];
 
+const whyVapt = [
+  { icon: Radar, title: "Discover the real attack surface", body: "Identify exposed services, vulnerable components, insecure configurations, and application weaknesses across the agreed scope." },
+  { icon: Gauge, title: "Prioritize by practical risk", body: "Separate scanner noise from validated issues and understand exploitability, affected assets, and likely business impact." },
+  { icon: FileSearch, title: "Give engineers usable evidence", body: "Provide reproduction steps, screenshots or requests where appropriate, affected components, and clear remediation recommendations." },
+  { icon: RotateCcw, title: "Validate fixes through retesting", body: "Reassess remediated findings where included and document whether the original exposure has been resolved." },
+];
+
+const toolGroups = [
+  ["Application & API", "Burp Suite, HCL AppScan, SAST, DAST, SCA"],
+  ["Mobile", "MobSF, Android Studio, Genymotion"],
+  ["Network", "Nmap, Wireshark, manual protocol validation"],
+  ["Exposure Management", "Tenable and Nessus"],
+  ["Cloud", "Prowler and configuration review workflows"],
+  ["SOC Operations", "Microsoft Sentinel, Defender for Endpoint, Check Point"],
+];
+
+const homeFaqs = [
+  ["Is VAPT only an automated vulnerability scan?", "No. Tools support coverage and discovery, while analysts manually validate important findings, assess exploitability, and document practical impact."],
+  ["What access is required for an assessment?", "It depends on the selected black box, grey box, or white box approach. Scope may include test accounts, API documentation, source context, IP ranges, or cloud configuration access."],
+  ["Will testing affect production systems?", "Testing boundaries, windows, exclusions, emergency contacts, and safety controls are agreed before work begins. High-risk techniques require explicit authorization."],
+  ["Do you provide remediation support and retesting?", "Reports include remediation recommendations. Retesting and findings discussions can be included in the written engagement scope."],
+];
+
 export default function Home() {
   return (
     <main className="page-main">
@@ -160,6 +184,23 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="section" id="why-vapt">
+        <SectionHeading
+          eyebrow="Why VAPT"
+          title="Move from vulnerability lists to defensible security decisions"
+          body="A useful assessment tells your team what is exposed, what can be exploited, why it matters, and what should be fixed first."
+        />
+        <div className="grid grid-4 outcome-grid">
+          {whyVapt.map(({ icon: Icon, title, body }, index) => (
+            <article className="outcome-card" key={title}>
+              <div className="outcome-top"><span>0{index + 1}</span><Icon size={25} aria-hidden="true" /></div>
+              <h3>{title}</h3>
+              <p>{body}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
       <section className="visual-section">
         <div>
           <SectionHeading
@@ -189,6 +230,22 @@ export default function Home() {
             <p>Authorization, authentication, data exposure, resource abuse, injection, and business workflow testing for REST and GraphQL APIs.</p>
             <ButtonLink href="/services/api-penetration-testing" variant="ghost">Explore API Security Testing</ButtonLink>
           </article>
+        </div>
+      </section>
+
+      <section className="section tools-section">
+        <div className="tools-intro">
+          <SectionHeading
+            eyebrow="Technology coverage"
+            title="Experienced across the tools in your security workflow"
+            body="Tooling is selected according to the environment and scope. Automated results are reviewed before they become report findings."
+          />
+          <div className="tool-assurance"><BadgeCheck size={26} aria-hidden="true" /><span>Manual analyst validation remains central to every assessment.</span></div>
+        </div>
+        <div className="tool-matrix">
+          {toolGroups.map(([title, body]) => (
+            <article key={title}><Wrench size={20} aria-hidden="true" /><div><h3>{title}</h3><p>{body}</p></div></article>
+          ))}
         </div>
       </section>
 
@@ -282,6 +339,22 @@ export default function Home() {
             <div className="principle-card" key={item}>
               {item}
             </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="section faq-section" id="faq">
+        <SectionHeading
+          eyebrow="Planning an assessment"
+          title="Answers to common VAPT questions"
+          body="The exact approach, coverage, schedule, and deliverables are confirmed in a written scope before testing begins."
+        />
+        <div className="faq-stack">
+          {homeFaqs.map(([question, answer], index) => (
+            <details key={question} open={index === 0}>
+              <summary><span>{question}</span><ArrowRight size={20} aria-hidden="true" /></summary>
+              <p>{answer}</p>
+            </details>
           ))}
         </div>
       </section>
