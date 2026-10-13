@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { serviceOptions } from "@/lib/services";
 
 const allowedServices = new Set<string>(serviceOptions);
-const allowedSizes = new Set(["1-10", "11-50", "51-200", "201-500", "501-1000", "1000+"]);
 const submissions = new Map<string, { count: number; resetAt: number }>();
 
 type LeadPayload = {
@@ -73,7 +72,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ message: "Please use a valid business email address." }, { status: 400 });
   }
 
-  if (!allowedServices.has(service) || !allowedSizes.has(companySize)) {
+  if (!allowedServices.has(service)) {
     return NextResponse.json({ message: "Please select valid form options." }, { status: 400 });
   }
 
@@ -86,7 +85,7 @@ export async function POST(request: NextRequest) {
     email,
     company,
     service,
-    companySize,
+    companySize: companySize || "Not provided",
     requirement,
     receivedAt: new Date().toISOString(),
     source: "cybervsi.com",

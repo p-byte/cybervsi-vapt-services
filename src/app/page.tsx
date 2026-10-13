@@ -1,5 +1,6 @@
 import { ButtonLink } from "@/components/ButtonLink";
 import { CtaBand } from "@/components/CtaBand";
+import { LeadForm } from "@/components/LeadForm";
 import { SectionHeading } from "@/components/SectionHeading";
 import { SecurityVisual } from "@/components/SecurityVisual";
 import { ServiceCard } from "@/components/ServiceCard";
@@ -107,13 +108,12 @@ export default function Home() {
   return (
     <main className="page-main">
       <section className="hero">
-        <div>
-          <p className="eyebrow">Web Application VAPT · API Security Testing</p>
-          <h1>Application Security Testing for Software Teams That Need Clear Answers.</h1>
+        <div className="hero-content">
+          <p className="eyebrow">Expert-led VAPT · India & Singapore</p>
+          <h1>Find exploitable risk before it becomes an incident.</h1>
           <p className="hero-copy">
-            {siteConfig.name} helps Indian startups and growing software companies identify
-            exploitable weaknesses in web applications and APIs, with practical remediation
-            guidance and verification testing.
+            {siteConfig.name} validates security weaknesses across web applications, APIs, mobile
+            apps, networks, and cloud environments, then gives your team a clear remediation plan.
           </p>
           <div className="hero-actions">
             <ButtonLink href="/request-assessment">Request a Security Assessment</ButtonLink>
@@ -124,8 +124,25 @@ export default function Home() {
               Talk to a Security Expert
             </ButtonLink>
           </div>
+          <ul className="hero-proof" aria-label="Assessment benefits">
+            <li>Manual validation</li>
+            <li>Evidence-backed reporting</li>
+            <li>Remediation guidance</li>
+            <li>Retesting support</li>
+          </ul>
         </div>
-        <SecurityVisual />
+        <div className="hero-form-wrap">
+          <p className="eyebrow">Secure assessment enquiry</p>
+          <h2>Request your security assessment</h2>
+          <p>Share the environment and objective. We will respond by email with the next steps for defining scope.</p>
+          <LeadForm compact />
+        </div>
+      </section>
+
+      <section className="signal-strip" aria-label="CyberVSI service coverage">
+        {operatingSignals.map(([value, label]) => (
+          <div className="metric" key={label}><strong>{value}</strong><span>{label}</span></div>
+        ))}
       </section>
 
       <section className="section section-alt">
@@ -141,6 +158,18 @@ export default function Home() {
             </div>
           ))}
         </div>
+      </section>
+
+      <section className="visual-section">
+        <div>
+          <SectionHeading
+            eyebrow="Assessment intelligence"
+            title="Connect findings to the systems and controls that matter"
+            body="Testing combines attack-surface discovery, analyst validation, evidence, and risk context so teams can move from observation to remediation."
+          />
+          <ButtonLink href="/reports" variant="secondary">View Sample Reports</ButtonLink>
+        </div>
+        <SecurityVisual />
       </section>
 
       <section className="section">
@@ -196,19 +225,6 @@ export default function Home() {
         <div>
           <h3>After the Assessment</h3>
           <ul className="check-list">{afterAssessment.map((item) => <li key={item}>{item}</li>)}</ul>
-        </div>
-      </section>
-
-      <section className="section section-alt">
-        <SectionHeading
-          eyebrow="Engagement coverage"
-          title="Clear capabilities without inflated numbers"
-          body="These figures describe the current service structure. Client, project, and experience claims will only be published when they can be verified."
-        />
-        <div className="grid grid-4">
-          {operatingSignals.map(([value, label]) => (
-            <div className="metric" key={label}><strong>{value}</strong><span>{label}</span></div>
-          ))}
         </div>
       </section>
 
