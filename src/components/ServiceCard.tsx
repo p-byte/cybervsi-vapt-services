@@ -6,15 +6,17 @@ export function ServiceCard({
   capabilities,
   href,
   cta,
+  slug,
 }: {
   title: string;
   description: string;
   capabilities: readonly string[];
   href: string;
   cta: string;
+  slug?: string;
 }) {
   return (
-    <article className="service-card">
+    <article className="service-card" id={slug}>
       <h3>{title}</h3>
       <p>{description}</p>
       <ul className="tag-list">

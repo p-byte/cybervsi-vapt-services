@@ -11,17 +11,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/contact",
     "/request-assessment",
     "/reports",
-    "/pricing",
     "/partners",
     "/vapt-services-india",
     "/vapt-services-singapore",
     "/privacy-policy",
     "/terms",
-    ...coreServices.map((service) => service.href),
+    ...coreServices.map((service) => service.href.split("#")[0]),
     ...Object.keys(penetrationTestingServices).map((slug) => `/services/${slug}`),
   ];
 
-  return routes.map((route) => ({
+  return [...new Set(routes)].map((route) => ({
     url: `${siteConfig.domain}${route}`,
     lastModified: new Date(),
     changeFrequency: route === "" ? "weekly" : "monthly",

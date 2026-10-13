@@ -11,8 +11,10 @@ export const metadata = pageMetadata({
 });
 
 const inquiryTypes = [
-  "VAPT Assessment",
-  "SOC Services",
+  "VAPT and penetration testing",
+  "SOC L1 and L2 analyst support",
+  "Vulnerability and application security",
+  "Cloud, network, Red Team, and AI security",
 ];
 
 export default function ContactPage() {

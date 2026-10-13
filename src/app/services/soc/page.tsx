@@ -5,13 +5,18 @@ import { siteConfig } from "@/lib/config";
 import { faqSchema, pageMetadata, serviceSchema } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "SOC Services",
+  title: "SOC L1 & L2 Support Services",
   description:
-    "Security Operations Center services for SIEM monitoring, alert investigation, threat detection, incident triage, escalation support, and reporting.",
+    "SOC L1 and L2 analyst support for Microsoft Sentinel, Microsoft Defender for Endpoint, Check Point, alert triage, investigation, escalation, and reporting.",
   path: "/services/soc",
 });
 
 const capabilities = [
+  "SOC L1 Alert Monitoring & Triage",
+  "SOC L2 Investigation & Escalation",
+  "Microsoft Sentinel",
+  "Microsoft Defender for Endpoint",
+  "Check Point Security",
   "SIEM Monitoring",
   "Security Alert Investigation",
   "Incident Triage",
@@ -62,14 +67,14 @@ const faqs = [
 export default function SocPage() {
   return (
     <main>
-      <JsonLd data={serviceSchema("SOC Services", metadata.description as string, "/services/soc")} />
+      <JsonLd data={serviceSchema("SOC L1 and L2 Support", metadata.description as string, "/services/soc")} />
       <JsonLd data={faqSchema(faqs)} />
       <section className="page-hero">
-        <p className="eyebrow">SOC Services</p>
-        <h1>Continuous Security Monitoring Without Building an Entire SOC In-House.</h1>
+        <p className="eyebrow">SOC L1 & L2 Support</p>
+        <h1>Practical Analyst Support for Security Monitoring and Investigation.</h1>
         <p>
-          Security operations support helps organizations collect relevant telemetry, investigate
-          alerts, classify incidents, and improve detection without overextending internal teams.
+          L1 and L2 security operations support helps teams monitor queues, triage alerts,
+          investigate suspicious activity, document evidence, and escalate confirmed incidents.
         </p>
       </section>
       <section className="section">

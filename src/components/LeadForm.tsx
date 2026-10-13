@@ -1,15 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-
-const serviceOptions = [
-  "Web Application VAPT",
-  "API Security Testing",
-  "Network VAPT",
-  "Vulnerability Management",
-  "SOC Services",
-  "Agency Partnership",
-];
+import { serviceOptions } from "@/lib/services";
 const companySizes = ["1-10", "11-50", "51-200", "201-500", "501-1000", "1000+"];
 type Status = "idle" | "loading" | "success" | "error";
 

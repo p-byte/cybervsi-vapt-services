@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
+import { serviceOptions } from "@/lib/services";
 
-const allowedServices = new Set(["VAPT", "SOC"]);
+const allowedServices = new Set<string>(serviceOptions);
 const allowedSizes = new Set(["1-10", "11-50", "51-200", "201-500", "501-1000", "1000+"]);
 const submissions = new Map<string, { count: number; resetAt: number }>();
 

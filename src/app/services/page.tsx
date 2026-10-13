@@ -9,7 +9,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   title: "Cybersecurity Services",
   description:
-    "Explore VAPT, SOC services, and vulnerability management services for startups, SMEs, enterprises, SaaS, fintech, healthcare, and e-commerce organizations.",
+    "Explore penetration testing, SOC L1 and L2 support, vulnerability management, AppSec, mobile, network, cloud, Red Team, and AI security services.",
   path: "/services",
 });
 
@@ -30,6 +30,10 @@ export default function ServicesPage() {
             <ServiceCard key={service.slug} {...service} />
           ))}
         </div>
+        <p className="service-note">
+          Tools shown describe technologies used where suitable for the agreed scope. Product names
+          belong to their respective owners and do not imply vendor endorsement or partnership.
+        </p>
       </section>
       <section className="section section-alt">
         <SectionHeading

@@ -57,6 +57,52 @@ const differentiators = [
   "Transparent communication",
 ];
 
+const testingApproaches = [
+  {
+    label: "External perspective",
+    title: "Black Box Testing",
+    body: "Testing with limited prior knowledge to simulate a realistic external attacker perspective.",
+    points: ["Minimal prior information", "External attack-surface focus", "Realistic attacker simulation"],
+  },
+  {
+    label: "Authenticated perspective",
+    title: "Grey Box Testing",
+    body: "Controlled knowledge or user access enables deeper application and authorization testing.",
+    points: ["Role and privilege testing", "Authenticated attack paths", "Balance of depth and realism"],
+  },
+  {
+    label: "Deep assessment",
+    title: "White Box Testing",
+    body: "Extensive technical information supports deeper testing of application logic, code, and architecture.",
+    points: ["Maximum assessment context", "Deep technical coverage", "Useful for complex applications"],
+  },
+];
+
+const assessmentDeliverables = [
+  "Executive security summary",
+  "Technical vulnerability findings",
+  "Severity and risk prioritization",
+  "Evidence or proof of concept where applicable",
+  "Impact analysis",
+  "Remediation recommendations",
+];
+
+const afterAssessment = [
+  "Remediation guidance for identified issues",
+  "Discussion of important findings with stakeholders",
+  "Retesting after remediation where included",
+  "Validation of resolved vulnerabilities",
+  "Scope-based support for compliance requirements",
+  "Clear next steps for improving security posture",
+];
+
+const operatingSignals = [
+  ["9", "Focused security service tracks"],
+  ["3", "Testing approaches available"],
+  ["L1 + L2", "SOC analyst support"],
+  ["India + Singapore", "Primary service markets"],
+];
+
 export default function Home() {
   return (
     <main className="page-main">
@@ -71,8 +117,8 @@ export default function Home() {
           </p>
           <div className="hero-actions">
             <ButtonLink href="/request-assessment">Request a Security Assessment</ButtonLink>
-            <ButtonLink href="/pricing" variant="secondary">
-              View VAPT Packages
+            <ButtonLink href="/services" variant="secondary">
+              Explore Security Services
             </ButtonLink>
             <ButtonLink href="/contact" variant="ghost">
               Talk to a Security Expert
@@ -114,6 +160,55 @@ export default function Home() {
             <p>Authorization, authentication, data exposure, resource abuse, injection, and business workflow testing for REST and GraphQL APIs.</p>
             <ButtonLink href="/services/api-penetration-testing" variant="ghost">Explore API Security Testing</ButtonLink>
           </article>
+        </div>
+      </section>
+
+      <section className="section section-alt">
+        <SectionHeading
+          eyebrow="Testing approaches"
+          title="Choose the approach that matches your security objective"
+          body="Black box, grey box, and white box testing can be selected according to the access, information, and depth required."
+        />
+        <div className="grid grid-3">
+          {testingApproaches.map((approach) => (
+            <article className="service-card" key={approach.title}>
+              <p className="eyebrow">{approach.label}</p>
+              <h3>{approach.title}</h3>
+              <p>{approach.body}</p>
+              <ul className="check-list">
+                {approach.points.map((point) => <li key={point}>{point}</li>)}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="split-section">
+        <div>
+          <SectionHeading
+            eyebrow="What you receive"
+            title="Turn security findings into an actionable remediation plan"
+            body="Reports are structured to help technical teams understand, prioritize, and address security weaknesses."
+          />
+          <h3>Assessment Deliverables</h3>
+          <ul className="check-list">{assessmentDeliverables.map((item) => <li key={item}>{item}</li>)}</ul>
+        </div>
+        <div>
+          <h3>After the Assessment</h3>
+          <ul className="check-list">{afterAssessment.map((item) => <li key={item}>{item}</li>)}</ul>
+        </div>
+      </section>
+
+      <section className="section section-alt">
+        <SectionHeading
+          eyebrow="Engagement coverage"
+          title="Clear capabilities without inflated numbers"
+          body="These figures describe the current service structure. Client, project, and experience claims will only be published when they can be verified."
+        />
+        <div className="grid grid-4">
+          {operatingSignals.map(([value, label]) => (
+            <div className="metric" key={label}><strong>{value}</strong><span>{label}</span></div>
+          ))}
         </div>
       </section>
 
